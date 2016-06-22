@@ -6,11 +6,11 @@ User.create(username:"caitlinc", email:"caitlin@gmail.com", password:"password")
 
 
 #Question
-Question.create(question: "How do I find the length of a string?", user_id:1)
-Question.create(question: "syntax to access object model in DOM", user_id:2)
-Question.create(question: "How do I change font color using css3?", user_id:1)
-Question.create(question: "How do I create h1 tags in html?", user_id:3)
-Question.create(question: "How do I select everything in DB using SQL?", user_id:4)
+Question.create(question: "How do I find the length of a string?", description:"I dont know how to find the length of the string. :(", user_id:1)
+Question.create(question: "syntax to access object model in DOM",description:"Javascript is hard.", user_id:2)
+Question.create(question: "How do I change font color using css3?", description:"Idk how to change the font color", user_id:1)
+Question.create(question: "How do I create header tags in html?", description:"I need to make headers.", user_id:3)
+Question.create(question: "How do I select everything in DB using SQL?", description:"Idk SQL :*", user_id:4)
 
 #Answers
 Answer.create(answer:"use .length", question_id: 1, user_id:2)

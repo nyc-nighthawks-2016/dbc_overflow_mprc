@@ -5,13 +5,15 @@
 
     <%@questions.each do |question|%><br>
      <div class="question-container">
-      <div class="username"><%=question.user.username%></div>
-      <div class="question"><%=question.question%></div>
-
-      <div class="answer-container"><%question.answers.each do |answer|%>
-        <div class="answer-author"><%=answer.user.username%></div>
-        <div class="answer"><%=answer.answer%></div>
-      <%end%></div>
+      <div class="question"><span class="author"><%=question.user.username%></span><%=question.question%></div>
+      <div class="question-comments"><%question.comments.each do |comment|%>
+        <div class="comment"><span class="author"><%=comment.user.username%></span><%=comment.comment%></div>
+        <%question.answers.each do |answer|%>
+        <div class="answer"><span class="author"><%=answer.user.username%></span><%=answer.answer%></div>
+        <%end%>
+     <%end%>
     <%end%>
 
 </div>
+
+
