@@ -1,0 +1,17 @@
+<h2>All Questions</h2>
+<hr>
+
+<div class=".container">
+
+    <%@questions.each do |question|%><br>
+     <div class="question-container">
+      <div class="username"><%=question.user.username%></div>
+      <div class="question"><%=question.question%></div>
+
+      <div class="answer-container"><%question.answers.each do |answer|%>
+        <div class="answer-author"><%=answer.user.username%></div>
+        <div class="answer"><%=answer.answer%></div>
+      <%end%></div>
+    <%end%>
+
+</div>
