@@ -5,4 +5,7 @@ class Question < ActiveRecord::Base
   has_many :tags, through: :question_tags
   has_many :comments, as: :commentable
   has_many :votes, as: :voteable
+
+  validates :question, presence: true
+  validates :user, presence: true
 end
