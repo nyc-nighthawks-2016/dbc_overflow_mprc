@@ -1,1 +1,7 @@
-hello world
+<h1>Questions</h1>
+<a href="/questions/new">Post a question</a>
+<ul>
+<% @questions.each do |question| %>
+  <li><a href="/questions/<%=question.id%>"><%= question.title%></a></li>
+  <% end %>
+</ul>
