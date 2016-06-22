@@ -1,3 +1,7 @@
+get '/users' do
+  #show all users links
+end
+
 get '/users/login' do
   if login?
     redirect "/users/#{session[:user_id]}"
@@ -46,5 +50,5 @@ get '/users/:user_id' do
     erb :'users/show'
   else
     redirect '/'
-  end 
+  end
 end
