@@ -45,10 +45,6 @@ get '/users/logout' do
 end
 
 get '/users/:user_id' do
-  if current_user == User.find(params[:user_id])
-    @user = current_user
+    @user = User.find(params[:user_id])
     erb :'users/show'
-  else
-    redirect '/'
-  end
 end

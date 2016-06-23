@@ -4,29 +4,45 @@
     <span class="num-answers">answers:<%=@question.answers.count%></span>
     <span class="num-views">visits:<%=@question.visits%></span>
   </div>
+<h3>Question:</h3>
   <a href="/questions/<%=@question.id%>">
     <div class="question-text"><h2><%=@question.question%></h2></div>
   </a>
+
+<a href="/users/<%=@question.user.id%>">
   <div class="author"><%=@question.user.username%></div>
+</a>
+
   <div class="question-description"><%=@question.description%></div>
+<h3>Comment(s):</h3>
   <form id="new_comment_button" action="/questions/<%=@question.id%>/comments" method="get">
     <input type="submit" value="add comment">
   </form>
 </div>
 <br>
+
+
 <div class="question-comments">
   <%@question.comments.each do |comment|%>
   <div class="comment">
-    <span class="author"><%=comment.user.username%></span><br>
+
+    <a href="/users/<%=comment.user.id%>"
+    <span class="author"><%=comment.user.username%></span>
+    </a>
     <%=comment.comment%>
+
+
   </div>
 </div>
 <%end%>
 
 <br>
+<h3>Answer(s):</h3>
 <div class="answer">
  <%@question.answers.each do |answer|%>
+    <a href="/users/<%=answer.user.id%>"
     <span class="author"><%=answer.user.username%></span><br>
+  </a>
     <%=answer.answer%>
     <br><br>
   <%end%>

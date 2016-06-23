@@ -12,12 +12,14 @@
       <a href="/questions/<%=question.id%>">
         <div class="question-text"><%=question.question%></div>
       </a>
-      <div class="author"><%=question.user.username%></div>
-      <div class="question"><%=question.description%></div>
-    </div>
+      <a href="/users/<%=question.user.id%>">
+        <div class="author"><%=question.user.username%></div>
+      </a>
+        <div class="question"><%=question.description%></div>
+      </div>
     <hr>
   <%end%>
 </div>
 
 
-   
+
