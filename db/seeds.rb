@@ -24,9 +24,6 @@ Comment.create(comment:"great question", commentable_id:1, commentable_type:"Que
 Comment.create(comment:"stupid question", commentable_id:2, commentable_type:"Question", user_id:3)
 Comment.create(comment:"go back to school", commentable_id:3, commentable_type:"Question", user_id:2)
 Comment.create(comment:"interesting", commentable_id:4, commentable_type:"Question", user_id:1)
-
-#comments on answers
-Comment.create(comment:"agreed", commentable_id:4, commentable_type:"Answer", user_id:4)
 Comment.create(comment:"no way", commentable_id:3, commentable_type:"Answer", user_id:2)
 Comment.create(comment:"tell me more", commentable_id:2, commentable_type:"Answer", user_id:1)
 Comment.create(comment:"please clarify", commentable_id:1, commentable_type:"Answer", user_id:3)
