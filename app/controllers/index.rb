@@ -1,4 +1,5 @@
 get '/' do
-  erb :index
+  @questions = Question.all
+  erb :'questions/index'
 end
 
