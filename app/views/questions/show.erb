@@ -4,23 +4,37 @@
     <span class="num-answers">answers:<%=@question.answers.count%></span>
     <span class="num-views">visits:<%=@question.visits%></span>
   </div>
-<h3>Question:</h3>
-  <a href="/questions/<%=@question.id%>">
-    <div class="question-text"><h2><%=@question.question%></h2></div>
-  </a>
 
-<a href="/users/<%=@question.user.id%>">
+  <div class="question-text"><h2><%=@question.question%></h2></div>
+
   <div class="author"><%=@question.user.username%></div>
 </a>
 
   <div class="question-description"><%=@question.description%></div>
+
 <h3>Comment(s):</h3>
+
+
+  <%if current_user.id == @question.user_id %>
+    <form id="delete-button" action="/questions/<%=@question.id%>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="delete">
+    </form>
+  <%end%>
+
+  <div class="comment-error">
+  <%if @comment_error%>
+    <%@comment_error.each do |error|%>
+      <div class="error">***<%=error%>***</div>
+    <%end%>
+  <%end%>
+  </div>
+
   <form id="new_comment_button" action="/questions/<%=@question.id%>/comments" method="get">
     <input type="submit" value="add comment">
   </form>
 </div>
 <br>
-
 
 <div class="question-comments">
   <%@question.comments.each do |comment|%>
@@ -31,7 +45,12 @@
     </a>
     <%=comment.comment%>
 
-
+    <%if current_user.id == comment.user_id %>
+      <form id="delete-button" action="/comments/<%=comment.id%>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="delete">
+      </form>
+    <%end%>
   </div>
 </div>
 <%end%>
@@ -44,15 +63,21 @@
     <span class="author"><%=answer.user.username%></span><br>
   </a>
     <%=answer.answer%>
+    <%if current_user.id == answer.user_id %>
+      <form id="delete-button" action="/answers/<%=answer.id%>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="delete">
+      </form>
+    <%end%>
     <br><br>
   <%end%>
 </div>
  <br>
 
-<div class="errors">
+<div class="answer_error">
   <%if @errors%>
     <%@errors.each do |error|%>
-      <div class="error">***<%=error%>***</div>
+      <div class="error">**<%=error%>**</div>
     <%end%>
   <%end%>
 </div>

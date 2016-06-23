@@ -19,14 +19,13 @@ post '/questions' do
   if @question.save
     redirect '/questions'
   else
-
     erb :'questions/new'
   end
 end
 
-
 get '/questions/:id' do
   @question = Question.find(params[:id])
+
   @question.visits += 1
   @question.save
   erb :'questions/show'
@@ -48,8 +47,8 @@ put '/questions/:id' do
   end
 end
 
-delete '/questions/:id' do
-  @question = Question.find(params[:id])
+delete '/questions/:question_id' do
+  @question = Question.find(params[:question_id])
   @question.destroy
   redirect '/questions'
 end
