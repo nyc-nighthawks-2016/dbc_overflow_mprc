@@ -1,10 +1,10 @@
 get '/questions' do
-  @questions = Question.all
+  @questions = Question.all.order(visits: :desc)
   erb :'questions/index'
 end
 
 get '/questions/new' do
-  if logged_in?
+  if login?
     erb :'questions/new'
   else
     @errors = ["Login to post a question."]
@@ -17,12 +17,15 @@ post '/questions' do
   if @question.save
     redirect '/questions'
   else
+
     erb :'questions/new'
   end
 end
 
 get '/questions/:id' do
-  @question = Question.find_by(id: params[:id])
+  @question = Question.find(params[:id])
+  @question.visits += 1
+  @question.save
   erb :'questions/show'
 end
 

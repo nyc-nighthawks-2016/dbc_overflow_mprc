@@ -1,19 +1,23 @@
 <h2>All Questions</h2>
 <hr>
 
-<div class=".container">
-
-    <%@questions.each do |question|%><br>
-     <div class="question-container">
-      <div class="question"><span class="author"><%=question.user.username%></span><%=question.question%></div>
-      <div class="question-comments"><%question.comments.each do |comment|%>
-        <div class="comment"><span class="author"><%=comment.user.username%></span><%=comment.comment%></div>
-        <%question.answers.each do |answer|%>
-        <div class="answer"><span class="author"><%=answer.user.username%></span><%=answer.answer%></div>
-        <%end%>
-     <%end%>
-    <%end%>
-
+<div class="question-container">
+  <%@questions.each do |question|%>
+    <div class="question">
+      <div class="stats">
+        <span class="num-votes">votes:<%=question.votes.count%></span>
+        <span class="num-answers">answers:<%=question.answers.count%></span>
+        <span class="num-views">visits:<%=question.visits%></span>
+      </div>
+      <a href="/questions/<%=question.id%>">
+        <div class="question-text"><%=question.question%></div>
+      </a>
+      <div class="author"><%=question.user.username%></div>
+      <div class="question"><%=question.description%></div>
+    </div>
+    <hr>
+  <%end%>
 </div>
 
 
+   
