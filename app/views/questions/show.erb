@@ -1,8 +1,16 @@
 <div class="question">
   <div class="stats">
-    <span class="num-votes">votes:<%=@question.votes.count%></span>
+    <span class="num-votes">votes:<%=@votes%></span>
     <span class="num-answers">answers:<%=@question.answers.count%></span>
-    <span class="num-views">visits:<%=@question.visits%></span>
+    <span class="num-views">views:<%=@question.visits%></span>
+  </div>
+  <div class="voting">
+    <form id="upvote_button" action="/<%=@question.id%>/upvote" method="post">
+     <input type="submit" value=&#8657;>
+    </form>
+   <form id="downvote_button" action="/<%=@question.id%>/downvote" method="post">
+     <input type="submit" value=&#8659;>
+   </form>
   </div>
 
   <div class="question-text"><h2><%=@question.question%></h2></div>
@@ -66,22 +74,34 @@
     <a href="/users/<%=answer.user.id%>"
     <span class="author"><%=answer.user.username%></span><br>
   </a>
-    <%=answer.answer%>
-    <%if login? && current_user.id == answer.user_id %>
-      <form id="delete-button" action="/answers/<%=answer.id%>" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <input type="submit" value="delete">
-      </form>
+  <%=answer.answer%>
+  <div class="voting">
+    <form id="upvote_button" action="/answers/<%=answer.id%>/upvote" method="post">
+      <input type="submit" value=&#8657;>
+    </form>
+
+    <div class="vote-stat"><%=(answer.votes.where(upvote:true).count)-(answer.votes.where(upvote:false).count)%></div>
+
+    <form id="downvote_button" action="/answers/<%=answer.id%>/downvote" method="post">
+      <input type="submit" value=&#8659;>
+    </form>
+  </div>
+  <%if login? && current_user.id == answer.user_id %>
+    <form id="delete-button" action="/answers/<%=answer.id%>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="delete">
+    </form>
+  <%end%>
+  <br>
+  <div class="answer-comments">
+    <%answer.comments.each do |comment|%>
+      <a href="/users/<%=comment.user_id%>"><div class="comment-author">
+        <%=comment.user.username%>
+      </div></a>
+
+      <div class="comment-text"><%=comment.comment%></div>
     <%end%>
-    <br>
-    <div class="answer-comments">
-      <%answer.comments.each do |comment|%>
-        <a href="/users/<%=comment.user_id%>"><div class="comment-author">
-          <%=comment.user.username%>
-        </div></a>
-        <div class="comment-text"><%=comment.comment%></div>
-      <%end%>
-    </div>
+  </div>
   <%end%>
 </div>
  <br>

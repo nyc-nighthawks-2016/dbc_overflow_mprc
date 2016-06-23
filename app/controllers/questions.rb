@@ -37,7 +37,9 @@ get '/questions/:question_id' do
   @question = Question.find(params[:question_id])
   @question.visits += 1
   @question.save
+  @votes = (@question.votes.where(upvote:true).count)-(@question.votes.where(upvote:false).count)
   erb :'questions/show'
+
 end
 
 get '/questions/:id/edit' do

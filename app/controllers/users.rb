@@ -1,5 +1,6 @@
 get '/users' do
-  #show all users and the links to users profiles
+  @users = User.all
+  erb :'users/index'
 end
 
 get '/users/login' do

@@ -14,7 +14,10 @@ post '/questions/:question_id/answers' do
   @answer_text=params[:answer]
   if login?
     @answer = Answer.new(answer:params[:answer], user_id:current_user.id, question_id:@question.id)
-    if @answer.save
+    if current_user.id == @question.user_id
+      @errors = ["You can't answer your own questions!"]
+      erb :'questions/show'
+    elsif @answer.save
       redirect "/questions/#{@question.id}"
     else
       @errors = @answer.errors.full_messages
@@ -32,4 +35,6 @@ delete '/answers/:answer_id' do
   @answer.destroy
   redirect "/questions/#{@question.id}"
 end
+
+
 
