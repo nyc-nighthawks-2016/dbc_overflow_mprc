@@ -39,26 +39,26 @@ Tag.create(name:"css")
 Tag.create(name:"html")
 Tag.create(name:"sql")
 
-#Votes
-#answers
-Vote.create(voteable_id: 2, voteable_type:"Answer", user_id:1)
-Vote.create(voteable_id: 1, voteable_type:"Answer", user_id:3)
-Vote.create(voteable_id:4, voteable_type:"Answer", user_id:2)
-Vote.create(voteable_id:3, voteable_type:"Answer", user_id:4)
+# #Votes
+# #answers
+# Vote.create(voteable_id: 2, voteable_type:"Answer", user_id:1)
+# Vote.create(voteable_id: 1, voteable_type:"Answer", user_id:3)
+# Vote.create(voteable_id:4, voteable_type:"Answer", user_id:2)
+# Vote.create(voteable_id:3, voteable_type:"Answer", user_id:4)
 
 
-#comments
-Vote.create(voteable_id:8, voteable_type:"Comment", user_id:4)
-Vote.create(voteable_id:7, voteable_type:"Comment", user_id:3)
-Vote.create(voteable_id:5, voteable_type:"Comment", user_id:2)
-Vote.create(voteable_id:3, voteable_type:"Comment", user_id:1)
+# #comments
+# Vote.create(voteable_id:8, voteable_type:"Comment", user_id:4)
+# Vote.create(voteable_id:7, voteable_type:"Comment", user_id:3)
+# Vote.create(voteable_id:5, voteable_type:"Comment", user_id:2)
+# Vote.create(voteable_id:3, voteable_type:"Comment", user_id:1)
 
 
-#questions
-Vote.create(voteable_id:4, voteable_type:"Question", user_id:1)
-Vote.create(voteable_id:3, voteable_type:"Question", user_id:2)
-Vote.create(voteable_id:2, voteable_type:"Question", user_id:3)
-Vote.create(voteable_id:1, voteable_type:"Question", user_id:4)
+# #questions
+# Vote.create(voteable_id:4, voteable_type:"Question", user_id:1)
+# Vote.create(voteable_id:3, voteable_type:"Question", user_id:2)
+# Vote.create(voteable_id:2, voteable_type:"Question", user_id:3)
+# Vote.create(voteable_id:1, voteable_type:"Question", user_id:4)
 
 
 #Question_Tags

@@ -5,7 +5,7 @@
   <%@questions.each do |question|%>
     <div class="question">
       <div class="stats">
-        <span class="num-votes">votes:<%=question.votes.count%></span>
+        <span class="num-votes">votes:<%=(question.votes.where(upvote:true).count)-(question.votes.where(upvote:false).count)%></span>
         <span class="num-answers">answers:<%=question.answers.count%></span>
         <span class="num-views">visits:<%=question.visits%></span>
       </div>
