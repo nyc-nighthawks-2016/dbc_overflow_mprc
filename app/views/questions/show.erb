@@ -8,14 +8,17 @@
   <div class="question-text"><h2><%=@question.question%></h2></div>
 
   <div class="author"><%=@question.user.username%></div>
-</a>
 
   <div class="question-description"><%=@question.description%></div>
 
-<h3>Comment(s):</h3>
+  <div class="question-tags">
+    <%@question.tags.each do |tag|%>
+      <div id="tag"><a href="/tags/<%=tag.id%>"><%=tag.name%></a></div>
+    <%end%>
+  </div>
 
 
-  <%if current_user.id == @question.user_id %>
+  <%if login? && current_user.id == @question.user_id %>
     <form id="delete-button" action="/questions/<%=@question.id%>" method="post">
       <input type="hidden" name="_method" value="delete">
       <input type="submit" value="delete">
@@ -33,7 +36,7 @@
   <form id="new_comment_button" action="/questions/<%=@question.id%>/comments" method="get">
     <input type="submit" value="add comment">
   </form>
-</div>
+
 <br>
 
 <div class="question-comments">
@@ -45,7 +48,7 @@
     </a>
     <%=comment.comment%>
 
-    <%if current_user.id == comment.user_id %>
+    <%if login? && current_user.id == comment.user_id %>
       <form id="delete-button" action="/comments/<%=comment.id%>" method="post">
         <input type="hidden" name="_method" value="delete">
         <input type="submit" value="delete">
@@ -55,6 +58,7 @@
 </div>
 <%end%>
 
+</div>
 <br>
 <h3>Answer(s):</h3>
 <div class="answer">
@@ -63,13 +67,21 @@
     <span class="author"><%=answer.user.username%></span><br>
   </a>
     <%=answer.answer%>
-    <%if current_user.id == answer.user_id %>
+    <%if login? && current_user.id == answer.user_id %>
       <form id="delete-button" action="/answers/<%=answer.id%>" method="post">
         <input type="hidden" name="_method" value="delete">
         <input type="submit" value="delete">
       </form>
     <%end%>
-    <br><br>
+    <br>
+    <div class="answer-comments">
+      <%answer.comments.each do |comment|%>
+        <a href="/users/<%=comment.user_id%>"><div class="comment-author">
+          <%=comment.user.username%>
+        </div></a>
+        <div class="comment-text"><%=comment.comment%></div>
+      <%end%>
+    </div>
   <%end%>
 </div>
  <br>
