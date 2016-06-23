@@ -1,5 +1,5 @@
 get '/users' do
-  #show all users links
+  #show all users and the links to users profiles
 end
 
 get '/users/login' do
