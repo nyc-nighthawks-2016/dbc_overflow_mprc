@@ -12,35 +12,24 @@ end
 post '/questions/:question_id/answers' do
   @question = Question.find(params[:question_id])
   @answer_text=params[:answer]
-  @answer = @question.answers.new(answer:params[:answer], user_id:current_user.id, question_id:@question.id)
-  if @answer.save
-    redirect "/questions/#{@question.id}/answers"
+  if login?
+    @answer = Answer.new(answer:params[:answer], user_id:current_user.id, question_id:@question.id)
+    if @answer.save
+      redirect "/questions/#{@question.id}"
+    else
+      @errors = @answer.errors.full_messages
+      erb :'questions/show'
+    end
   else
-    @errors = @answer.errors.full_messages
+    @errors=["Please log in to answer a question."]
     erb :'questions/show'
   end
 end
 
-delete '/questions/:question_id/answers/:id' do
-  @question = Question.find(params[:question_id])
-  @answer = @question.answers.find(params[:id])
+delete '/answers/:answer_id' do
+  @answer = Answer.find(params[:answer_id])
+  @question = Question.find(@answer.question_id)
   @answer.destroy
-  redirect "/questions/#{@question.id}/answers"
+  redirect "/questions/#{@question.id}"
 end
-
-
-# <%if @question.user_id == current_user.id%>
-#   <form>
-#   #delete
-#   </form
-# <%end%>
-
-
-
-# <%if @question.user_id == current_user.id%>
-#   <form>
-#     #edit
-#   </form
-# <%end%>
-
 
