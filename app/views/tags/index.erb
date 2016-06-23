@@ -1,0 +1,5 @@
+<h3> Tags </h3>
+<hr>
+<%@tags.each do |tag|%>
+  <div class="tag-buttons"><a href="tags/<%=tag.id%>"><%=tag.name%></a></div>
+<%end%>
