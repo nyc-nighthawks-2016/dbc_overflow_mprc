@@ -1,3 +1,4 @@
+
 get '/questions' do
   @questions = Question.all.order(visits: :desc)
   erb :'questions/index'
@@ -13,7 +14,8 @@ get '/questions/new' do
 end
 
 post '/questions' do
-  @question = Question.new(params[:question])
+  @question = Question.new(params)
+  @question.user = current_user
   if @question.save
     redirect '/questions'
   else
@@ -21,6 +23,7 @@ post '/questions' do
     erb :'questions/new'
   end
 end
+
 
 get '/questions/:id' do
   @question = Question.find(params[:id])
