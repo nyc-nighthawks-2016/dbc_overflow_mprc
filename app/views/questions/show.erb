@@ -12,6 +12,14 @@
   <form id="new_comment_button" action="/questions/<%=@question.id%>/comments" method="get">
     <input type="submit" value="add comment">
   </form>
+  <form id="upvote button" action="/votes/<%=@question.id%>/upvote" method="post">
+    <input type="submit" value="up vote">
+    <input type="hidden" name="voteable_type" value="Question">
+  </form>
+  <form id="downvote button" action="/votes/<%=@question.id%>/downvote" method="post">
+    <input type="submit" value="down vote">
+    <input type="hidden" name="voteable_type" value="Question">
+  </form>
 </div>
 <br>
 <div class="question-comments">
