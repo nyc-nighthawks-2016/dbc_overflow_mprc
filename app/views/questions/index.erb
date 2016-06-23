@@ -1,0 +1,25 @@
+<h2>All Questions</h2>
+<hr>
+
+<div class="question-container">
+  <%@questions.each do |question|%>
+    <div class="question">
+      <div class="stats">
+        <span class="num-votes">votes:<%=question.votes.count%></span>
+        <span class="num-answers">answers:<%=question.answers.count%></span>
+        <span class="num-views">visits:<%=question.visits%></span>
+      </div>
+      <a href="/questions/<%=question.id%>">
+        <div class="question-text"><%=question.question%></div>
+      </a>
+      <a href="/users/<%=question.user.id%>">
+        <div class="author"><%=question.user.username%></div>
+      </a>
+        <div class="question"><%=question.description%></div>
+      </div>
+    <hr>
+  <%end%>
+</div>
+
+
+

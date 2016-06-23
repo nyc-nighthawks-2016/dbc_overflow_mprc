@@ -1,0 +1,66 @@
+<div class="question">
+  <div class="stats">
+    <span class="num-votes">votes:<%=@question.votes.count%></span>
+    <span class="num-answers">answers:<%=@question.answers.count%></span>
+    <span class="num-views">visits:<%=@question.visits%></span>
+  </div>
+<h3>Question:</h3>
+  <a href="/questions/<%=@question.id%>">
+    <div class="question-text"><h2><%=@question.question%></h2></div>
+  </a>
+
+<a href="/users/<%=@question.user.id%>">
+  <div class="author"><%=@question.user.username%></div>
+</a>
+
+  <div class="question-description"><%=@question.description%></div>
+<h3>Comment(s):</h3>
+  <form id="new_comment_button" action="/questions/<%=@question.id%>/comments" method="get">
+    <input type="submit" value="add comment">
+  </form>
+</div>
+<br>
+
+
+<div class="question-comments">
+  <%@question.comments.each do |comment|%>
+  <div class="comment">
+
+    <a href="/users/<%=comment.user.id%>"
+    <span class="author"><%=comment.user.username%></span>
+    </a>
+    <%=comment.comment%>
+
+
+  </div>
+</div>
+<%end%>
+
+<br>
+<h3>Answer(s):</h3>
+<div class="answer">
+ <%@question.answers.each do |answer|%>
+    <a href="/users/<%=answer.user.id%>"
+    <span class="author"><%=answer.user.username%></span><br>
+  </a>
+    <%=answer.answer%>
+    <br><br>
+  <%end%>
+</div>
+ <br>
+
+<div class="errors">
+  <%if @errors%>
+    <%@errors.each do |error|%>
+      <div class="error">***<%=error%>***</div>
+    <%end%>
+  <%end%>
+</div>
+
+<div class="submit-answer">
+  <h2>Your Answer:</h2>
+  <form action="/questions/<%=@question.id%>/answers" method="post">
+    <textarea rows="10" cols="50" id="answer-text" name="answer"><%=@answer_text%></textarea>
+    <input type="submit" value="Post Your Answer">
+  </form>
+</div>
