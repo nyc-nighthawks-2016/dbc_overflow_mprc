@@ -4,9 +4,16 @@
     <span class="num-answers">answers:<%=@question.answers.count%></span>
     <span class="num-views">visits:<%=@question.visits%></span>
   </div>
+
   <div class="question-text"><h2><%=@question.question%></h2></div>
+
   <div class="author"><%=@question.user.username%></div>
+</a>
+
   <div class="question-description"><%=@question.description%></div>
+
+<h3>Comment(s):</h3>
+
 
   <%if current_user.id == @question.user_id %>
     <form id="delete-button" action="/questions/<%=@question.id%>" method="post">
@@ -28,11 +35,16 @@
   </form>
 </div>
 <br>
+
 <div class="question-comments">
   <%@question.comments.each do |comment|%>
   <div class="comment">
-    <span class="author"><%=comment.user.username%></span><br>
+
+    <a href="/users/<%=comment.user.id%>"
+    <span class="author"><%=comment.user.username%></span>
+    </a>
     <%=comment.comment%>
+
     <%if current_user.id == comment.user_id %>
       <form id="delete-button" action="/comments/<%=comment.id%>" method="post">
         <input type="hidden" name="_method" value="delete">
@@ -44,9 +56,12 @@
 <%end%>
 
 <br>
+<h3>Answer(s):</h3>
 <div class="answer">
  <%@question.answers.each do |answer|%>
+    <a href="/users/<%=answer.user.id%>"
     <span class="author"><%=answer.user.username%></span><br>
+  </a>
     <%=answer.answer%>
     <%if current_user.id == answer.user_id %>
       <form id="delete-button" action="/answers/<%=answer.id%>" method="post">
