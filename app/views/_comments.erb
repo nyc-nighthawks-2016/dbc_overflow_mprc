@@ -3,8 +3,8 @@
   <%=@comment.comment%>
   <%if login? && current_user.id == @comment.user_id %>
     <form id="delete-button" action="/comments/<%=@comment.id%>" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <input type="submit" value="delete">
+     <input type="hidden" name="_method" value="delete">
+     <input type="submit" value="delete">
     </form>
   <%end%>
 </div>

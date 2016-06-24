@@ -89,7 +89,8 @@
 
         <%answer.comments.each do |comment|%>
           <div class="answer-comments">
-                    <a href="/users/<%=comment.user_id%>"><div class="comment-author"><%=comment.user.username%></div></a>
+            <div class="single-comment">
+            <a href="/users/<%=comment.user_id%>"><div class="comment-author"><%=comment.user.username%></div></a>
             <div class="comment-text"><%=comment.comment%></div>
             <%if login? && current_user.id == comment.user_id %>
               <form id="delete-button" action="/comments/<%=comment.id%>" method="post">
@@ -100,11 +101,14 @@
                 <input type="submit" value="edit">
               </form>
             <%end%>
+           </div>
           </div>
         <%end%>
-        <form id="new_comment_button" action="/answers/<%=answer.id%>/comments" method="get">
+        <form class="add-answer-comment" action="/answers/<%=answer.id%>/comments" method="get">
           <input type="submit" value="add comment">
         </form>
+        <div class="add-answer-comment-form"></div>
+
       </div>
     <%end%>
 
