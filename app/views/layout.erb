@@ -22,20 +22,26 @@
     <nav class="my_nav">
       <%if login?%>
          <div class="nav-button"><a href="/users/logout">Logout</a></div>
+         <div id="current-user"><a href="/users/<%=current_user.id%>"><%=current_user.username%></div>
       <%else%>
         <div id="login_button" class="nav-button"><a href="/users/login">Login</a></div>
         <div class="nav-button"><a href="/users/new">Register</a></div>
         <div id="login"></div>
+        <form class="search_button"  action="http://stackoverflow.com/" method="get">
+ <input type="text" placeholder="Search Q&A" required>
+ <input type="button" value="Search">
+</form>
       <%end%>
     </nav>
-    <menu>
-      <div class="menu-button"><a href='/questions'>Questions</a></div>
-      <div class="menu-button"><a href='/tags'>Tags</a></div>
-      <div class="menu-button"><a href='/users'>Users</a></div>
-      <div class="menu-button"><a href='/questions/new'>Ask A Question</a></div>
-    </menu>
-    <h1 id="website_title">STACK OVERFLOW JUNIOR</h1>
-  </div>
+   <menu>
+    <div class="menu_button">
+    <button type="button"> <a href='/questions'>Questions</a></button>
+    <button type="button"> <a href='/tags'>Tags</a></button>
+    <button type="button"> <a href='/users'>Users</a></button>
+    <button type="button"> <a href='/questions/new'>Ask A Question</a></button>
+    </div>
+  </menu>
+  <h1><img src="https://imageshack.com/i/poRLjCdDj" alt="Mountain View"<img></h1>
   <%=yield%>
 </body>
 </html>
