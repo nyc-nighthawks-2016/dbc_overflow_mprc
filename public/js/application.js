@@ -19,4 +19,17 @@ $(document).ready(function() {
       $('#layout').html(response);
     });
   });
+
+  $('#add-answer').submit(function(e){
+    e.preventDefault();
+    var target = e.target
+    $.ajax({
+      url:$(target).attr('action'),
+      method:$(target).attr('method'),
+      data:$(target).serialize()
+    }).done(function(response){
+      $('.answer_container').html(response);
+    });
+  });
+
 });

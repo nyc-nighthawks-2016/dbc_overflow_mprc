@@ -61,49 +61,50 @@
 <br>
 
 <h3>Answer(s):</h3>
-
-<div class="answer">
-  <%@question.answers.each do |answer|%>
-    <a href="/users/<%=answer.user.id%>"><span class="author"><%=answer.user.username%></span></a>
-    <%=answer.answer%>
-    <div class="voting">
-      <form id="upvote_button" action="/answers/<%=answer.id%>/upvote" method="post">
-        <input type="submit" value=&#8657;>
-      </form>
-      <div class="vote-stat"><%=(answer.votes.where(upvote:true).count)-(answer.votes.where(upvote:false).count)%></div>
-      <form id="downvote_button" action="/answers/<%=answer.id%>/downvote" method="post">
-        <input type="submit" value=&#8659;>
-      </form>
-    </div>
-    <%if login? && current_user.id == answer.user_id %>
-      <form id="delete-button" action="/answers/<%=answer.id%>" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <input type="submit" value="delete">
-      </form>
-      <form id="edit-button" action="/answers/<%=answer.id%>" method="get">
-        <input type="submit" value="edit">
-      </form>
-    <%end%>
-    <br>
-    <div class="answer-comments">
-      <%answer.comments.each do |comment|%>
-        <a href="/users/<%=comment.user_id%>"><div class="comment-author"><%=comment.user.username%></div></a>
-        <div class="comment-text"><%=comment.comment%></div>
-        <%if login? && current_user.id == comment.user_id %>
-          <form id="delete-button" action="/comments/<%=comment.id%>" method="post">
-            <input type="hidden" name="_method" value="delete">
-            <input type="submit" value="delete">
-          </form>
-          <form id="edit-button" action="/comments/<%=comment.id%>" method="get">
-            <input type="submit" value="edit">
-          </form>
-        <%end%>
+<div class="answer_container">
+  <div class="answer">
+    <%@question.answers.each do |answer|%>
+      <a href="/users/<%=answer.user.id%>"><span class="author"><%=answer.user.username%></span></a>
+      <%=answer.answer%>
+      <div class="voting">
+        <form id="upvote_button" action="/answers/<%=answer.id%>/upvote" method="post">
+          <input type="submit" value=&#8657;>
+        </form>
+        <div class="vote-stat"><%=(answer.votes.where(upvote:true).count)-(answer.votes.where(upvote:false).count)%></div>
+        <form id="downvote_button" action="/answers/<%=answer.id%>/downvote" method="post">
+          <input type="submit" value=&#8659;>
+        </form>
       </div>
+      <%if login? && current_user.id == answer.user_id %>
+        <form id="delete-button" action="/answers/<%=answer.id%>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="delete">
+        </form>
+        <form id="edit-button" action="/answers/<%=answer.id%>" method="get">
+          <input type="submit" value="edit">
+        </form>
+      <%end%>
+      <br>
+      <div class="answer-comments">
+        <%answer.comments.each do |comment|%>
+          <a href="/users/<%=comment.user_id%>"><div class="comment-author"><%=comment.user.username%></div></a>
+          <div class="comment-text"><%=comment.comment%></div>
+          <%if login? && current_user.id == comment.user_id %>
+            <form id="delete-button" action="/comments/<%=comment.id%>" method="post">
+              <input type="hidden" name="_method" value="delete">
+              <input type="submit" value="delete">
+            </form>
+            <form id="edit-button" action="/comments/<%=comment.id%>" method="get">
+              <input type="submit" value="edit">
+            </form>
+          <%end%>
+        </div>
+      <%end%>
+        <form id="new_comment_button" action="/answers/<%=answer.id%>/comments" method="get">
+          <input type="submit" value="add comment">
+        </form>
     <%end%>
-      <form id="new_comment_button" action="/answers/<%=answer.id%>/comments" method="get">
-        <input type="submit" value="add comment">
-      </form>
-  <%end%>
+  </div>
 </div>
 
 <br>
@@ -118,7 +119,7 @@
 
 <div class="submit-answer">
   <h2>Your Answer:</h2>
-  <form action="/questions/<%=@question.id%>/answers" method="post">
+  <form id="add-answer" action="/questions/<%=@question.id%>/answers" method="post">
     <textarea rows="10" cols="50" id="answer-text" name="answer"><%=@answer_text%></textarea>
     <input type="submit" value="Post Your Answer">
   </form>
