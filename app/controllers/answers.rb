@@ -5,6 +5,7 @@ get '/questions/:question_id/answers' do
 end
 
 get '/questions/:question_id/answers/new' do
+  register_user
   @question = Question.find(params[:question_id])
   erb :'answers/new'
 end
@@ -13,15 +14,21 @@ post '/questions/:question_id/answers' do
   @question = Question.find(params[:question_id])
   @answer_text=params[:answer]
   if login?
-    @answer = Answer.new(answer:params[:answer], user_id:current_user.id, question_id:@question.id)
+    @answer = current_user.answers.new(answer:params[:answer], question_id:@question.id)
     if current_user.id == @question.user_id
-      @errors = ["You can't answer your own questions!"]
-      erb :'questions/show'
-    elsif @answer.save
-      redirect "/questions/#{@question.id}"
+        @errors = ["You can't answer your own questions!"]
+        erb :'questions/show'
     else
-      @errors = @answer.errors.full_messages
-      erb :'questions/show'
+      if @answer.save
+        if request.xhr?
+          erb :'_answer', layout: false
+        else
+          erb :'questions/show'
+        end
+      else
+        @errors = @answer.errors.full_messages
+        erb :'questions/show'
+      end
     end
   else
     @errors=["Please log in to answer a question."]
