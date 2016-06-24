@@ -1,5 +1,10 @@
-<h2>Users</h2>
+<div id="users">
+  <h2>Users</h2>
   <%@users.each do |user|%>
-    <a href="users/<%=user.id%>"><div class="user"><%=user.username%></div></a>
-  <%end%>
-
+    <div class="user_profile_link">
+      <a href="users/<%=user.id%>"><div class="user"><%=user.username%></div></a>
+      <div><p>Member since: <%=user.created_at.strftime('%F')%></p></div>
+    </div>
+    <%end%>
+  </div>
+ 

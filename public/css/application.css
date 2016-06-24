@@ -10,6 +10,8 @@ nav{
 
 .nav-button{
   display: inline-block;
+  margin: 0px 30px;
+  padding:10px;
 }
 
 menu{
@@ -27,4 +29,29 @@ menu{
 
 h1, h2{
   padding: 20px 30px;
+}
+
+.user_profile_link{
+  width:150px;
+  display:inline-block;
+  border: 2px black;
+  margin:10px;
+}
+
+a{
+  text-decoration: none;
+  color:grey;
+}
+
+a:hover{
+  color:blue;
+}
+
+#user-activity-container a{
+  color: blue;
+}
+
+
+#users{
+  width:70%;
 }

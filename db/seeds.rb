@@ -3,14 +3,17 @@ User.create(username:"marcoman", email:"marco@gmail.com", password:"password")
 User.create(username:"robcav", email:"robcav@gmail.com", password:"password")
 User.create(username:"patrick", email:"patrick@gmail.com", password:"password")
 User.create(username:"caitlinc", email:"caitlin@gmail.com", password:"password")
-
+User.create(username:"lizzie", email:"lizzie@gmail.com", password:"password")
+User.create(username:"computerdude", email:"computerdude@gmail.com", password:"password")
+User.create(username:"adachai", email:"adachai@gmail.com", password:"password")
+User.create(username:"dawnchai", email:"dawnchai@gmail.com", password:"password")
 
 #Question
-Question.create(question: "How do I find the length of a string?", description:"I dont know how to find the length of the string. :(", user_id:1)
-Question.create(question: "syntax to access object model in DOM",description:"Javascript is hard.", user_id:2)
-Question.create(question: "How do I change font color using css3?", description:"Idk how to change the font color", user_id:1)
-Question.create(question: "How do I create header tags in html?", description:"I need to make headers.", user_id:3)
-Question.create(question: "How do I select everything in DB using SQL?", description:"Idk SQL :*", user_id:4)
+Question.create(question: "How do I find the length of a string?", description:"Lorem ipsum dolor sit amet, id has eius facilisis, noluisse reprimique vix in. Sit in tibique intellegat, vel ex essent prodesset. Quis minimum vulputate id pri, no nullam verterem democritum usu. Postulant corrumpit est no. Eros veri salutandi sit no, et molestie patrioque sadipscing eum. Saperet tacimates eam id, eum habemus offendit at.", user_id:1)
+Question.create(question: "syntax to access object model in DOM",description:"Zril concludaturque nam ad, id quo elit ipsum mentitum. Eum illud quodsi delicata et. Id denique adolescens usu. Mei meis legere nostro ad, duis altera laoreet ut usu.", user_id:2)
+Question.create(question: "How do I change font color using css3?", description:"An minim everti iracundia cum, qui ne case ubique. Case discere gloriatur nec ne, id usu purto iriure appetere. Usu libris inermis accusamus cu, cum te partem dolorem. Alia reque vix at, tantas albucius in cum, ad pri facer cetero consetetur. Nec at audiam alienum interpretaris, at consequat incorrupte mea.", user_id:1)
+Question.create(question: "How do I create header tags in html?", description:"Id pri appareat evertitur. Viderer diceret usu at. Ex mea rebum minimum consectetuer, simul audire instructior vis ei. Quo nostrud civibus dissentias ut, ei diceret efficiantur eum, viderer conceptam an sit. Ius ea natum interpretaris, an mea eirmod blandit. Eam affert praesent te, an mazim philosophia sed, id ludus semper torquatos duo. Cu choro semper maiorum nec, unum magna aperiam nam et, semper maluisset quo in.", user_id:3)
+Question.create(question: "How do I select everything in DB using SQL?", description:"lass aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet.", user_id:4)
 
 #Answers
 Answer.create(answer:"use .length", question_id: 1, user_id:2)
