@@ -3,7 +3,7 @@ def login?
 end
 
 def register_user
-  redirect '/login' unless login?
+  redirect '/users/login' unless login?
 end
 
 def current_user

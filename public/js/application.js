@@ -20,6 +20,9 @@ $(document).ready(function() {
     });
   });
 
+
+  // add answer
+
   $('#add-answer').submit(function(e){
     e.preventDefault();
     var target = e.target
@@ -28,7 +31,35 @@ $(document).ready(function() {
       method:$(target).attr('method'),
       data:$(target).serialize()
     }).done(function(response){
-      $('.answer_container').html(response);
+      $('.answers').append(response);
+    });
+  });
+
+
+
+  $('#add-question-comment').submit(function(e){
+    e.preventDefault();
+    var target=e.target
+    $.ajax({
+      url:$(target).attr('action'),
+      method:$(target).attr('method')
+    }).done(function(response){
+      console.log(response)
+      $('#add-question-comment-form').html(response);
+    });
+  });
+
+  $('#add-question-comment-form').on('submit','#add-comment', function(e){
+    e.preventDefault();
+    // debugger
+    var target = e.target
+    $.ajax({
+      url:$(target).attr('action'),
+      method:$(target).attr('method'),
+      data:$(target).serialize()
+    }).done(function(response){
+      $('.question-comments').append(response);
+      $(target).hide();
     });
   });
 

@@ -36,15 +36,15 @@
     <%end%>
   </div>
 
-  <form id="new_comment_button" action="/questions/<%=@question.id%>/comments" method="get">
+  <form id="add-question-comment" action="/questions/<%=@question.id%>/comments" method="get">
     <input type="submit" value="add comment">
   </form>
-
+  <div id="add-question-comment-form"></div>
   <br>
 
   <div class="question-comments">
     <%@question.comments.each do |comment|%>
-      <div class="comment">
+      <div class="single-comment">
         <a href="/users/<%=comment.user.id%>"><span class="author"><%=comment.user.username%></span></a>
         <%=comment.comment%>
         <%if login? && current_user.id == comment.user_id %>
@@ -62,8 +62,9 @@
 
 <h3>Answer(s):</h3>
 <div class="answer_container">
-  <div class="answer">
+  <div class="answers">
     <%@question.answers.each do |answer|%>
+    <div class="individual_answer">
       <a href="/users/<%=answer.user.id%>"><span class="author"><%=answer.user.username%></span></a>
       <%=answer.answer%>
       <div class="voting">
@@ -85,25 +86,28 @@
         </form>
       <%end%>
       <br>
-      <div class="answer-comments">
+
         <%answer.comments.each do |comment|%>
-          <a href="/users/<%=comment.user_id%>"><div class="comment-author"><%=comment.user.username%></div></a>
-          <div class="comment-text"><%=comment.comment%></div>
-          <%if login? && current_user.id == comment.user_id %>
-            <form id="delete-button" action="/comments/<%=comment.id%>" method="post">
-              <input type="hidden" name="_method" value="delete">
-              <input type="submit" value="delete">
-            </form>
-            <form id="edit-button" action="/comments/<%=comment.id%>" method="get">
-              <input type="submit" value="edit">
-            </form>
-          <%end%>
-        </div>
-      <%end%>
+          <div class="answer-comments">
+                    <a href="/users/<%=comment.user_id%>"><div class="comment-author"><%=comment.user.username%></div></a>
+            <div class="comment-text"><%=comment.comment%></div>
+            <%if login? && current_user.id == comment.user_id %>
+              <form id="delete-button" action="/comments/<%=comment.id%>" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="submit" value="delete">
+              </form>
+              <form id="edit-button" action="/comments/<%=comment.id%>" method="get">
+                <input type="submit" value="edit">
+              </form>
+            <%end%>
+          </div>
+        <%end%>
         <form id="new_comment_button" action="/answers/<%=answer.id%>/comments" method="get">
           <input type="submit" value="add comment">
         </form>
+      </div>
     <%end%>
+
   </div>
 </div>
 
