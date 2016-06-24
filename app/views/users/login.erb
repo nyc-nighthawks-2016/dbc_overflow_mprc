@@ -3,14 +3,14 @@
 
   <p><%=@error%></p>
  
-  <form action="/users/login" method="post">
+  <form id="login_form" action="/users/login" method="post">
     <label for="email">Email:</label>
     <input type="email" name="user[email]"><br>
 
     <label for="password">Password:</label>
     <input type="password" name="user[password]"><br>
 
-    <input type="submit" value="Login"><br><br>
+    <input id="submit_login" type="submit" value="Login"><br><br>
   </form>
 
 </div>

@@ -29,6 +29,19 @@ post '/questions/:question_id/answers' do
   end
 end
 
+get '/answers/:answer_id' do
+  @answer = Answer.find(params[:answer_id])
+  erb :'answers/edit'
+end
+
+put '/answers/:answer_id' do
+  answer = Answer.find(params[:answer_id])
+  question = answer.question
+  answer.answer = params[:answer]
+  answer.save
+  redirect "/questions/#{question.id}"
+end
+
 delete '/answers/:answer_id' do
   @answer = Answer.find(params[:answer_id])
   @question = Question.find(@answer.question_id)
@@ -37,4 +50,8 @@ delete '/answers/:answer_id' do
 end
 
 
-
+get '/users/:user_id/answers' do
+  user = User.find(params[:user_id])
+  @answers = Answer.where(user_id:user.id).order(updated_at: :desc)
+  erb :'answers/show'
+end

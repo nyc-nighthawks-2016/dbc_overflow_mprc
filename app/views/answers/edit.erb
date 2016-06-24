@@ -1,0 +1,5 @@
+<form action="/answers/<%=@answer.id%>" method="post">
+  <input type="hidden" name="_method" value="put">
+  answer: <textarea name="answer" cols="50" rows="10"><%=@answer.answer%></textarea>
+  <input type="submit" value="update answer">
+</form>

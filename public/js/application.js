@@ -1,7 +1,22 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
-
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  $('#login_button').click(function(e){
+    e.preventDefault();
+    $.ajax({
+      url:"/users/login",
+      type:"GET"
+    }).done(function(response){
+      $('#login').html(response);
+    });
+  });
+  $('#submit_login').submit(function(e){
+    e.preventDefault();
+    $.ajax({
+      url:"/users/login",
+      type:"POST",
+      data:$('#login_form').serialize()
+    }).done(function(response){
+      $('#login').html("");
+      $('#layout').html(response);
+    });
+  });
 });

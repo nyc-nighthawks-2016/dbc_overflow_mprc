@@ -63,3 +63,9 @@ delete '/questions/:question_id' do
   @question.destroy
   redirect '/questions'
 end
+
+get '/users/:user_id/questions' do
+  user = User.find(params[:user_id])
+  @questions = Question.where(user_id:user.id).order(updated_at: :desc)
+  erb :'questions/index'
+end

@@ -6,25 +6,20 @@
   </div>
   <div class="voting">
     <form id="upvote_button" action="/<%=@question.id%>/upvote" method="post">
-     <input type="submit" value=&#8657;>
+      <input type="submit" value=&#8657;>
     </form>
-   <form id="downvote_button" action="/<%=@question.id%>/downvote" method="post">
-     <input type="submit" value=&#8659;>
-   </form>
+    <form id="downvote_button" action="/<%=@question.id%>/downvote" method="post">
+      <input type="submit" value=&#8659;>
+    </form>
   </div>
-
   <div class="question-text"><h2><%=@question.question%></h2></div>
-
-  <div class="author"><%=@question.user.username%></div>
-
+  <a href="/users/<%=@question.user.id%>"><div class="author"><%=@question.user.username%></div></a>
   <div class="question-description"><%=@question.description%></div>
-
   <div class="question-tags">
     <%@question.tags.each do |tag|%>
       <div id="tag"><a href="/tags/<%=tag.id%>"><%=tag.name%></a></div>
     <%end%>
   </div>
-
 
   <%if login? && current_user.id == @question.user_id %>
     <form id="delete-button" action="/questions/<%=@question.id%>" method="post">
@@ -34,77 +29,84 @@
   <%end%>
 
   <div class="comment-error">
-  <%if @comment_error%>
-    <%@comment_error.each do |error|%>
-      <div class="error">***<%=error%>***</div>
+    <%if @comment_error%>
+      <%@comment_error.each do |error|%>
+        <div class="error">**<%=error%>**</div>
+      <%end%>
     <%end%>
-  <%end%>
   </div>
 
   <form id="new_comment_button" action="/questions/<%=@question.id%>/comments" method="get">
     <input type="submit" value="add comment">
   </form>
 
+  <br>
+
+  <div class="question-comments">
+    <%@question.comments.each do |comment|%>
+      <div class="comment">
+        <a href="/users/<%=comment.user.id%>"><span class="author"><%=comment.user.username%></span></a>
+        <%=comment.comment%>
+        <%if login? && current_user.id == comment.user_id %>
+          <form id="delete-button" action="/comments/<%=comment.id%>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="delete">
+          </form>
+        <%end%>
+      </div>
+    <%end%>
+  </div>
+</div>
+
 <br>
 
-<div class="question-comments">
-  <%@question.comments.each do |comment|%>
-  <div class="comment">
+<h3>Answer(s):</h3>
 
-    <a href="/users/<%=comment.user.id%>"
-    <span class="author"><%=comment.user.username%></span>
-    </a>
-    <%=comment.comment%>
-
-    <%if login? && current_user.id == comment.user_id %>
-      <form id="delete-button" action="/comments/<%=comment.id%>" method="post">
+<div class="answer">
+  <%@question.answers.each do |answer|%>
+    <a href="/users/<%=answer.user.id%>"><span class="author"><%=answer.user.username%></span></a>
+    <%=answer.answer%>
+    <div class="voting">
+      <form id="upvote_button" action="/answers/<%=answer.id%>/upvote" method="post">
+        <input type="submit" value=&#8657;>
+      </form>
+      <div class="vote-stat"><%=(answer.votes.where(upvote:true).count)-(answer.votes.where(upvote:false).count)%></div>
+      <form id="downvote_button" action="/answers/<%=answer.id%>/downvote" method="post">
+        <input type="submit" value=&#8659;>
+      </form>
+    </div>
+    <%if login? && current_user.id == answer.user_id %>
+      <form id="delete-button" action="/answers/<%=answer.id%>" method="post">
         <input type="hidden" name="_method" value="delete">
         <input type="submit" value="delete">
       </form>
+      <form id="edit-button" action="/answers/<%=answer.id%>" method="get">
+        <input type="submit" value="edit">
+      </form>
     <%end%>
-  </div>
+    <br>
+    <div class="answer-comments">
+      <%answer.comments.each do |comment|%>
+        <a href="/users/<%=comment.user_id%>"><div class="comment-author"><%=comment.user.username%></div></a>
+        <div class="comment-text"><%=comment.comment%></div>
+        <%if login? && current_user.id == comment.user_id %>
+          <form id="delete-button" action="/comments/<%=comment.id%>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="delete">
+          </form>
+          <form id="edit-button" action="/comments/<%=comment.id%>" method="get">
+            <input type="submit" value="edit">
+          </form>
+        <%end%>
+      </div>
+    <%end%>
+      <form id="new_comment_button" action="/answers/<%=answer.id%>/comments" method="get">
+        <input type="submit" value="add comment">
+      </form>
+  <%end%>
 </div>
-<%end%>
 
-</div>
 <br>
-<h3>Answer(s):</h3>
-<div class="answer">
- <%@question.answers.each do |answer|%>
-    <a href="/users/<%=answer.user.id%>"
-    <span class="author"><%=answer.user.username%></span><br>
-  </a>
-  <%=answer.answer%>
-  <div class="voting">
-    <form id="upvote_button" action="/answers/<%=answer.id%>/upvote" method="post">
-      <input type="submit" value=&#8657;>
-    </form>
-
-    <div class="vote-stat"><%=(answer.votes.where(upvote:true).count)-(answer.votes.where(upvote:false).count)%></div>
-
-    <form id="downvote_button" action="/answers/<%=answer.id%>/downvote" method="post">
-      <input type="submit" value=&#8659;>
-    </form>
-  </div>
-  <%if login? && current_user.id == answer.user_id %>
-    <form id="delete-button" action="/answers/<%=answer.id%>" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <input type="submit" value="delete">
-    </form>
-  <%end%>
-  <br>
-  <div class="answer-comments">
-    <%answer.comments.each do |comment|%>
-      <a href="/users/<%=comment.user_id%>"><div class="comment-author">
-        <%=comment.user.username%>
-      </div></a>
-
-      <div class="comment-text"><%=comment.comment%></div>
-    <%end%>
-  </div>
-  <%end%>
-</div>
- <br>
 
 <div class="answer_error">
   <%if @errors%>
