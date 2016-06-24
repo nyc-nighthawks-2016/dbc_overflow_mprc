@@ -3,10 +3,11 @@
     <p>*<%=error%></p>
   <% end %>
 <%end%>
-
-<form action="/users" method="post">
+<div id="register-form">
+<form id="register-new" action="/users" method="post">
   Username: <input type="type" name="user[username]"><br>
   Email: <input type="email" name="user[email]"><br>
   Password: <input type="password" name="user[password]"><br>
   <input type="submit" value="Register">
 </form>
+</div>
