@@ -1,0 +1,11 @@
+<div class="user-answers">
+  <%@answers.each do |answer|%>
+    <div class="votes">
+      <%=((answer.votes.where(upvote:true).count)-(answer.votes.where(upvote:false).count))%></div>
+    </div>
+    <div class="question">
+      <a href="/questions/<%=answer.question.id%>"><%=answer.question.question%></a>
+      <p><%=answer.created_at.strftime("%F")%></p>
+    </div>
+  <%end%>
+</div>

@@ -18,21 +18,24 @@
   <title>Stack Overflow</title>
 </head>
 <body>
-  <nav class="my_nav">
-    <%if login?%>
-       <div class="nav_button"><a href="/users/logout">Logout</a></div>
-    <%else%>
-      <div class="nav_button"><a href="/users/login">Login</a></div>
-      <div class="nav_button"><a href="/users/new">Register</a></div>
-    <%end%>
-  </nav>
-  <menu>
-    <div class="menu_button"><a href='/questions'>Questions</a></div>
-    <div class="menu_button"><a href='/tags'>Tags</a></div>
-    <div class="menu_button"><a href='/users'>Users</a></div>
-    <div class="menu_button"><a href='/questions/new'>Ask A Question</a></div>
-  </menu>
-  <h1>STACK OVERFLOW JUNIOR</h1>
+  <div id="layout">
+    <nav class="my_nav">
+      <%if login?%>
+         <div class="nav-button"><a href="/users/logout">Logout</a></div>
+      <%else%>
+        <div id="login_button" class="nav-button"><a href="/users/login">Login</a></div>
+        <div class="nav-button"><a href="/users/new">Register</a></div>
+        <div id="login"></div>
+      <%end%>
+    </nav>
+    <menu>
+      <div class="menu-button"><a href='/questions'>Questions</a></div>
+      <div class="menu-button"><a href='/tags'>Tags</a></div>
+      <div class="menu-button"><a href='/users'>Users</a></div>
+      <div class="menu-button"><a href='/questions/new'>Ask A Question</a></div>
+    </menu>
+    <h1 id="website_title">STACK OVERFLOW JUNIOR</h1>
+  </div>
   <%=yield%>
 </body>
 </html>

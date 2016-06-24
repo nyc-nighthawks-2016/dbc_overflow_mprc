@@ -1,3 +1,30 @@
-body{
+/*body{
   padding:70px;
+}*/
+
+nav{
+  background-color: lightblue;
+  padding: 20px;
+  text-align: center;
+}
+
+.nav-button{
+  display: inline-block;
+}
+
+menu{
+  text-align: right;
+  padding: 50px;
+}
+
+.menu-button{
+  display: inline-block;
+}
+
+.question-container{
+  padding:30px;
+}
+
+h1, h2{
+  padding: 20px 30px;
 }

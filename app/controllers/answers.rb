@@ -50,4 +50,8 @@ delete '/answers/:answer_id' do
 end
 
 
-
+get '/users/:user_id/answers' do
+  user = User.find(params[:user_id])
+  @answers = Answer.where(user_id:user.id).order(updated_at: :desc)
+  erb :'answers/show'
+end

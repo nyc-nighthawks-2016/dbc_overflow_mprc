@@ -7,7 +7,11 @@ get '/users/login' do
   if login?
     redirect "/users/#{session[:user_id]}"
   else
-    erb :'users/login'
+    if request.xhr?
+      erb :'users/login', layout:false
+    else
+      erb :'users/login'
+    end
   end
 end
 
@@ -15,7 +19,11 @@ post '/users/login' do
   @user= User.find_by(email:params[:user][:email])
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
-      redirect "/users/#{@user.id}"
+      if request.xhr?
+        erb :layout
+      else
+        redirect "/"
+      end
     else
       @error = "Email/password combination not found."
       erb :'users/login'
@@ -48,9 +56,4 @@ end
 get '/users/:user_id' do
   @user = User.find(params[:user_id])
   erb :'users/show'
-end
-
-get '/users/:user_id/answers' do
-  @user = User.find(params[:user_id])
-  erb :'answers/show'
 end
