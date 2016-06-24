@@ -7,18 +7,16 @@
   <div class="question-text"><h2><%=@question.question%></h2></div>
   <div class="author"><%=@question.user.username%></div>
   <div class="question-description"><%=@question.description%></div>
-
-  <%if current_user.id == @question.user_id %>
-    <form id="delete-button" action="/questions/<%=@question.id%>" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <input type="submit" value="delete">
-    </form>
-  <%end%>
-
+    <%if login? && current_user.id == @question.user_id %>
+      <form id="delete-button" action="/questions/<%=@question.id%>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="delete">
+      </form>
+    <%end%>
   <div class="comment-error">
   <%if @comment_error%>
     <%@comment_error.each do |error|%>
-      <div class="error">***<%=error%>***</div>
+      <div class="error">**<%=error%>**</div>
     <%end%>
   <%end%>
   </div>
@@ -33,7 +31,7 @@
   <div class="comment">
     <span class="author"><%=comment.user.username%></span><br>
     <%=comment.comment%>
-    <%if current_user.id == comment.user_id %>
+    <%if login? && current_user.id == comment.user_id %>
       <form id="delete-button" action="/comments/<%=comment.id%>" method="post">
         <input type="hidden" name="_method" value="delete">
         <input type="submit" value="delete">
@@ -48,13 +46,20 @@
  <%@question.answers.each do |answer|%>
     <span class="author"><%=answer.user.username%></span><br>
     <%=answer.answer%>
-    <%if current_user.id == answer.user_id %>
+    <%if login? && current_user.id == answer.user_id %>
       <form id="delete-button" action="/answers/<%=answer.id%>" method="post">
         <input type="hidden" name="_method" value="delete">
         <input type="submit" value="delete">
       </form>
     <%end%>
-    <br><br>
+    <br>
+    <%answer.comments.each do |comment|%>
+      <%=comment.comment%>
+    <%end%>
+    <form id="new_comment_button" action="/answers/<%=answer.id%>/comments" method="get">
+      <input type="submit" value="add comment">
+    </form>
+    <br>
   <%end%>
 </div>
  <br>

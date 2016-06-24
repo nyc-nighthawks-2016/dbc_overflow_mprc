@@ -1,4 +1,11 @@
-<form id="add-comment" method="post" action="/questions/<%=@question.id%>/comments">
-  comment: <textarea name="comment" cols="50" rows="10"></textarea>
-  <input type="submit" value="post comment">
-</form>
+<%if @question%>
+  <form id="add-comment" method="post" action="/questions/<%=@question.id%>/comments">
+    comment: <textarea name="comment" cols="50" rows="10"></textarea>
+    <input type="submit" value="post comment">
+  </form>
+<%else%>
+  <form id="add-comment" method="post" action="/answers/<%=@answer.id%>/comments">
+    comment: <textarea name="comment" cols="50" rows="10"></textarea>
+    <input type="submit" value="post comment">
+  </form>
+<%end%>
