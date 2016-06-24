@@ -1,6 +1,7 @@
 get '/questions/:question_id/comments' do
   @question = Question.find(params[:question_id])
   if login?
+    @action = "/questions/#{@question.id}/comments"
     erb :'comments/new'
   else
     @comment_error = ["Please login to continue."]
@@ -21,8 +22,8 @@ end
 
 get '/answers/:answer_id/comments' do
   @answer = Answer.find(params[:answer_id])
-  # @question = answer.question
   if login?
+    @action = "/answers/#{@answer.id}/comments"
     erb :'comments/new'
   else
     @comment_error = ["Please login to continue."]
@@ -42,10 +43,31 @@ post '/answers/:answer_id/comments' do
   end
 end
 
-delete '/comments/:comment_id' do
+get '/comments/:comment_id' do
   @comment = Comment.find(params[:comment_id])
-  @question = Question.find(@comment.commentable_id)
-  @comment.destroy
+  erb :'comments/edit'
+end
+
+put '/comments/:comment_id' do
+  comment = Comment.find(params[:comment_id])
+  if comment.commentable_type == "Question"
+    question = Question.find(comment.commentable_id)
+  else
+    answer = Answer.find(comment.commentable_id)
+    question = answer.question
+  end
+  comment.comment = params[:comment]
+  comment.save
+  redirect "/questions/#{question.id}"
+end
+
+delete '/comments/:comment_id' do
+  comment = Comment.find(params[:comment_id])
+  answer = Answer.find(comment.commentable_id)
+  @question = answer.question
+  comment.destroy
   redirect "/questions/#{@question.id}"
 end
+
+
 

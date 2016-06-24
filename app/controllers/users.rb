@@ -1,5 +1,6 @@
 get '/users' do
-  #show all users and the links to users profiles
+  @users = User.all
+  erb :'users/index'
 end
 
 get '/users/login' do
@@ -45,10 +46,11 @@ get '/users/logout' do
 end
 
 get '/users/:user_id' do
-  if current_user == User.find(params[:user_id])
-    @user = current_user
-    erb :'users/show'
-  else
-    redirect '/'
-  end
+  @user = User.find(params[:user_id])
+  erb :'users/show'
+end
+
+get '/users/:user_id/answers' do
+  @user = User.find(params[:user_id])
+  erb :'answers/show'
 end

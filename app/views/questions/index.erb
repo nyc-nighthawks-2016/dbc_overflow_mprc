@@ -5,19 +5,21 @@
   <%@questions.each do |question|%>
     <div class="question">
       <div class="stats">
-        <span class="num-votes">votes:<%=question.votes.count%></span>
+        <span class="num-votes">votes:<%=(question.votes.where(upvote:true).count)-(question.votes.where(upvote:false).count)%></span>
         <span class="num-answers">answers:<%=question.answers.count%></span>
         <span class="num-views">visits:<%=question.visits%></span>
       </div>
       <a href="/questions/<%=question.id%>">
         <div class="question-text"><%=question.question%></div>
       </a>
-      <div class="author"><%=question.user.username%></div>
-      <div class="question"><%=question.description%></div>
-    </div>
+      <a href="/users/<%=question.user.id%>">
+        <div class="author"><%=question.user.username%></div>
+      </a>
+        <div class="question"><%=question.description%></div>
+      </div>
     <hr>
   <%end%>
 </div>
 
 
-   
+

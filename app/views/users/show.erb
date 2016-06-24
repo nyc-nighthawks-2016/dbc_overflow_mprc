@@ -1,1 +1,21 @@
-<p>Success! User <strong><%=@user.username%></strong> is logged in.</p>
+<h3><%= @user.username %>'s Activity Statistics:</h3>
+
+<a href="/users/<%=@user.id%>/answers">Answers (<%= @user.answers.count %></a><br>
+
+Questions (<%= @user.questions.count %>) <br>
+
+<h3>Post Activity</h3>
+<h4>Questions:</h4>
+<%@user.questions.each do |question| %>
+<div> <%= question.question %> </div>
+<% end %>
+<h4>Answers:</h4>
+<% @user.answers.each do |answer| %>
+<div> <%= answer.answer %> </div>
+<% end %>
+<h4>Comments:</h4>
+<% @user.comments.each do |comment| %>
+<div><%= comment.comment %> </div>
+<% end %>
+
+

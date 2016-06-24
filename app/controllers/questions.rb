@@ -13,10 +13,22 @@ get '/questions/new' do
 end
 
 post '/questions' do
-  @question = Question.new(params[:question])
+  @question = Question.new(question:params[:question],description: params[:description], user_id:current_user.id)
   if @question.save
-    redirect '/questions'
+    tags=params[:tags_list].split(' ')
+    tags.each do |tag|
+    tag.downcase!
+    check_tag = Tag.find_by(name:tag)
+      if !!check_tag
+        QuestionTag.create(tag_id:check_tag.id, question_id:@question.id)
+      else
+        new_tag=Tag.create(name:tag)
+        QuestionTag.create(question_id:@question.id, tag_id:new_tag.id)
+      end
+    end
+    redirect "/questions/#{@question.id}"
   else
+    @errors = @question.errors.full_messages
     erb :'questions/new'
   end
 end
@@ -25,7 +37,9 @@ get '/questions/:question_id' do
   @question = Question.find(params[:question_id])
   @question.visits += 1
   @question.save
+  @votes = (@question.votes.where(upvote:true).count)-(@question.votes.where(upvote:false).count)
   erb :'questions/show'
+
 end
 
 get '/questions/:id/edit' do

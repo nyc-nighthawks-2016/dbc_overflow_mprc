@@ -1,0 +1,5 @@
+<h2>Users</h2>
+  <%@users.each do |user|%>
+    <a href="users/<%=user.id%>"><div class="user"><%=user.username%></div></a>
+  <%end%>
+

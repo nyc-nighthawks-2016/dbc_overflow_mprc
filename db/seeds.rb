@@ -14,7 +14,7 @@ Question.create(question: "How do I select everything in DB using SQL?", descrip
 
 #Answers
 Answer.create(answer:"use .length", question_id: 1, user_id:2)
-Answer.create(answer:"use $('')", question_id: 2, user_id:4)
+Answer.create(answer:"use $", question_id: 2, user_id:4)
 Answer.create(answer:"set color:(color)", question_id: 3, user_id:3)
 Answer.create(answer:"use SELECT * FROM (tablename)", question_id: 5, user_id:1)
 
@@ -24,41 +24,38 @@ Comment.create(comment:"great question", commentable_id:1, commentable_type:"Que
 Comment.create(comment:"stupid question", commentable_id:2, commentable_type:"Question", user_id:3)
 Comment.create(comment:"go back to school", commentable_id:3, commentable_type:"Question", user_id:2)
 Comment.create(comment:"interesting", commentable_id:4, commentable_type:"Question", user_id:1)
-
-#comments on answers
-Comment.create(comment:"agreed", commentable_id:4, commentable_type:"Answer", user_id:4)
 Comment.create(comment:"no way", commentable_id:3, commentable_type:"Answer", user_id:2)
 Comment.create(comment:"tell me more", commentable_id:2, commentable_type:"Answer", user_id:1)
 Comment.create(comment:"please clarify", commentable_id:1, commentable_type:"Answer", user_id:3)
 
 #Tags
-Tag.create(name:"Ruby")
-Tag.create(name:"Jquery")
-Tag.create(name:"Javascript")
-Tag.create(name:"CSS")
-Tag.create(name:"HTML")
-Tag.create(name:"SQL")
+Tag.create(name:"ruby")
+Tag.create(name:"jquery")
+Tag.create(name:"javascript")
+Tag.create(name:"css")
+Tag.create(name:"html")
+Tag.create(name:"sql")
 
-#Votes
-#answers
-Vote.create(voteable_id: 2, voteable_type:"Answer", user_id:1)
-Vote.create(voteable_id: 1, voteable_type:"Answer", user_id:3)
-Vote.create(voteable_id:4, voteable_type:"Answer", user_id:2)
-Vote.create(voteable_id:3, voteable_type:"Answer", user_id:4)
-
-
-#comments
-Vote.create(voteable_id:8, voteable_type:"Comment", user_id:4)
-Vote.create(voteable_id:7, voteable_type:"Comment", user_id:3)
-Vote.create(voteable_id:5, voteable_type:"Comment", user_id:2)
-Vote.create(voteable_id:3, voteable_type:"Comment", user_id:1)
+# #Votes
+# #answers
+# Vote.create(voteable_id: 2, voteable_type:"Answer", user_id:1)
+# Vote.create(voteable_id: 1, voteable_type:"Answer", user_id:3)
+# Vote.create(voteable_id:4, voteable_type:"Answer", user_id:2)
+# Vote.create(voteable_id:3, voteable_type:"Answer", user_id:4)
 
 
-#questions
-Vote.create(voteable_id:4, voteable_type:"Question", user_id:1)
-Vote.create(voteable_id:3, voteable_type:"Question", user_id:2)
-Vote.create(voteable_id:2, voteable_type:"Question", user_id:3)
-Vote.create(voteable_id:1, voteable_type:"Question", user_id:4)
+# #comments
+# Vote.create(voteable_id:8, voteable_type:"Comment", user_id:4)
+# Vote.create(voteable_id:7, voteable_type:"Comment", user_id:3)
+# Vote.create(voteable_id:5, voteable_type:"Comment", user_id:2)
+# Vote.create(voteable_id:3, voteable_type:"Comment", user_id:1)
+
+
+# #questions
+# Vote.create(voteable_id:4, voteable_type:"Question", user_id:1)
+# Vote.create(voteable_id:3, voteable_type:"Question", user_id:2)
+# Vote.create(voteable_id:2, voteable_type:"Question", user_id:3)
+# Vote.create(voteable_id:1, voteable_type:"Question", user_id:4)
 
 
 #Question_Tags
